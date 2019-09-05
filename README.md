@@ -1,4 +1,4 @@
-# devices
+# Interactive Devices
 
 Interactive Devices
 Jesse Wayne
