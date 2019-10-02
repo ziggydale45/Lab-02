@@ -1,10 +1,10 @@
-#Jack in the Box
+# Jack in the Box
 For this week’s lab, we will be building a Jack in the box; this is a project inspired by the known toy. We will use this lab to help you to experiment with digital fabrication tools. The methods that will be used are 3D printing and laser cutting. Video of similar box
 
-##In the report
+## In the report
 To submit your lab, clone this repository -- and include all files / images / code that is requested!
 
-##Laser Cutting
+## Laser Cutting
 Laser cut cardboard to make your box in the Maker Lab.
 
 Download a vector editing program like Inkscape (free) or Adobe Illustrator (free for 30 day trial).
@@ -32,7 +32,7 @@ Notice that part G is not part of the Box itself. It will be used as the top lif
 
 Picture1
 
-3D Printing
+## 3D Printing
 3D print this servo mount stl file:
 
 Download and install Ultimaker Cura.
@@ -41,12 +41,13 @@ Make sure the orientation of your part makes sense. What orientation makes the m
 Turn off the raft. There is no need to print a raft for this part.
 Connect your laptop to the printer over USB, or via WiFi. Ask any member of the teaching team for WiFi credentials.
 Once the Printer is connected hit "print".
-Electronics
+
+## Electronics
 electronics circuit
 
 Tip: If you don't have the 9V connector, you just need to make sure that the micro controller is plugged into your computer, for power.
 
-Program your device
+## Program your device
 Load the example previously downloaded.
 
 You can also make your own program but make sure you put HIGH digital value to pin 5 if you connected the circuit as the one in the electronics part.
@@ -57,10 +58,10 @@ Pay attention that you can change the position of close and open box in the foll
 
 #define openPos 110
 
-Putting it all together
+## Putting it all together
 Think about where each component should go, and assemble your box so it would work as the one in the video from the beginning.
 
-Create Jack
+## Create Jack
 To make the character in the box a 3D printed part:
 
 Create a free education OnShape account using your student email.
@@ -72,10 +73,76 @@ Create a free education OnShape account using your student email.
 Do the sketching tutorial and part design tutorial to learn the basics of Computer Aided Design (CAD) on OnShape.
 Create a 3D character
 Use the KiriMoto app from the OnShape app store (it’s free to edu users) to slice the shape into laser cuttable parts.
-Lab Submission
+
+## Lab Submission
 For your write up, include:
 
 Your Arduino code.
+```
+//  Box Lab 5
+//
+// If we see a voltage change on pin 2 the toggle switch on top of the useless box has 
+// changed position and we need to react!
+//    A HIGH value on pin 2 means we should activate the servo to open the useless 
+//    box and attempt to return the switch to the "off" position.
+//    A LOW value on pin 2 means the switch is off and we should return to our 
+//    inital (closed box) state.
+
+#include <Servo.h> 
+
+#define servoPin  10
+#define switchPin 2
+
+#define closePos  10
+#define openPos   110
+
+Servo servo;
+int switchState;
+int previousSwitchState;
+
+// call this when the input on pin 2 changes (LOW to HIGH *or* HIGH to LOW)
+void ToggleSwitch(int switchState)
+{    
+  if (switchState == HIGH)
+  {
+    servo.write(openPos);
+    //Serial.println("switch state is HIGH.  servo.write(openPos) called to open useless box");
+  }
+  else
+  {
+    servo.write(closePos);
+    //Serial.println("switch state is LOW.   servo.write(closePos) called to close useless box");
+  }
+  previousSwitchState = switchState;  // remember that the switch state has changed 
+}
+
+void setup()
+{
+  //Serial.begin(9600);
+  //Serial.println("Useless Box Lab 5");
+  pinMode(5,OUTPUT);
+  digitalWrite(5,HIGH);
+  // start with the box closed and the switch in the off postion
+  switchState = LOW;
+  previousSwitchState = LOW;
+
+  // connect to our servo and make sure it is in the closed position
+  servo.attach(servoPin);
+  servo.write(closePos);
+
+  // we should probably pay attention to the switch
+  pinMode(switchPin, INPUT); 
+}
+
+void loop()
+{ 
+  int switchState = digitalRead(switchPin);
+  if (switchState != previousSwitchState)
+    ToggleSwitch(switchState);
+
+  delay(20);
+}
+```
 
 .stl or .svg files for your Jack — if you use some other technique, include the respective supporting material.
 
