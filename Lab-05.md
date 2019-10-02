@@ -145,7 +145,10 @@ void loop()
 ```
 
 .stl or .svg files for your Jack — if you use some other technique, include the respective supporting material.
+[pic])https://github.com/ziggydale45/Lab-02/blob/master/johnway.png)
 
 At least one photo of your box taken in the MakerLab's Portable Photo Studio (or somewhere else, but of similar quality).
+[picture] (https://github.com/ziggydale45/Lab-02/blob/master/IMG_0455.JPG)
 
 A video of your box in action.
+![movie] (https://youtu.be/3nWsDvjpMv0)
