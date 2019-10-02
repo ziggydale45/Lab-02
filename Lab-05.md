@@ -1,4 +1,4 @@
-# Jack in the Box
+# Johnway in the Box
 For this week’s lab, we will be building a Jack in the box; this is a project inspired by the known toy. We will use this lab to help you to experiment with digital fabrication tools. The methods that will be used are 3D printing and laser cutting. Video of similar box
 
 ## In the report
